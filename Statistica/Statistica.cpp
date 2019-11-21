@@ -3,10 +3,13 @@
 
 #include "pch.h"
 #include <iostream>
+#include "experiment.h"
 
 int main()
 {
-    std::cout << "Hello World!\n"; 
+	Texperiment exp;
+	exp.setY();
+	exp.setX();
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
