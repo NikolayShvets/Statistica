@@ -109,6 +109,7 @@ Tmatrix Tmatrix::operator*(const Tmatrix & rMatrix) const
 
 Tmatrix Tmatrix::operator*(double rValue) const
 {
+	
 	Tmatrix resMatrix(this->rowsCount(), this->colsCount());
 	for (int i = 0; i < this->rowsCount(); ++i) {
 		for (int j = 0; j < this->colsCount(); ++j) {
@@ -164,13 +165,43 @@ Tmatrix Tmatrix::operator!()
 	return R;
 }
 
-Tmatrix & Tmatrix::T()
+Tmatrix  Tmatrix::T()
 {
-	assert(this->rowsCount() == this->colsCount());
-	for (int i = 0; i < this->rowsCount() - 1; i++)
-		for (int j = i + 1; j < this->rowsCount(); j++)
-			std::swap(this->operator()(i, j), this->operator()(j, i));
-	return *this;
+	if (this->rowsCount() > this->colsCount()) {
+		int temp = this->rowsCount() - this->colsCount();
+		Tmatrix resMatrix(*this);
+		resMatrix.resize(rowsCount(), rowsCount());
+		for (int i = 0; i < resMatrix.rowsCount(); i++) {
+			for (int j = i; j < resMatrix.colsCount(); j++) {
+				std::swap(resMatrix(i, j), resMatrix(j, i));
+			}
+			//print(resMatrix);
+		}
+
+		resMatrix.resize(rowsCount() - temp, rowsCount());
+		return resMatrix;
+	}
+	if (this->rowsCount() < this->colsCount()) {
+		int temp = this->colsCount() - this->rowsCount();
+		Tmatrix resMatrix(*this);
+		resMatrix.resize(colsCount(), colsCount());
+		for (int i = 0; i < resMatrix.rowsCount(); i++) {
+			for (int j = i; j < resMatrix.colsCount(); j++) {
+				std::swap(resMatrix(i, j), resMatrix(j, i));
+			}
+		}
+		resMatrix.resize(colsCount(), colsCount() - temp);
+		return resMatrix;
+	}
+	else {
+		Tmatrix resMatrix(rowsCount(), rowsCount());
+		for (int i = 0; i < resMatrix.rowsCount(); i++) {
+			for (int j = 0; j < resMatrix.colsCount(); j++) {
+				std::swap(resMatrix(i, j), resMatrix(j, i));
+			}
+		}
+		return resMatrix;
+	}
 }
 
 Tmatrix & Tmatrix::swapRows(int pos, int newPos)

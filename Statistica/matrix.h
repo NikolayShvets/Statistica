@@ -29,7 +29,7 @@ public:
 	Tmatrix operator * (const Tmatrix & rMatrix) const;
 	Tmatrix operator * (double rValue) const;
 	Tmatrix operator ! ();//инвертирование матрицы
-	Tmatrix & T();//транспонирование матрицы
+	Tmatrix  T();//транспонирование матрицы
 	Tmatrix& swapRows(int pos, int newPos);
 	Tmatrix I(int rows);//получение единичной матрицы
 	Tvector operator * (const Tvector& rVector) const; //умножение матрицы на вектор
