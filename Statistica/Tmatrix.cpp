@@ -231,7 +231,7 @@ Tmatrix Tmatrix::I(int rows)
 
 Tvector Tmatrix::operator*(const Tvector & rVector) const
 {
-	assert(rVector.size() == this->rowsCount());
+	assert(rVector.size() == this->colsCount());
 	Tvector V(this->rowsCount());
 	for (int i = 0; i < this->rowsCount(); i++)
 	{
