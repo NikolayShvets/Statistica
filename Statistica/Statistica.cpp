@@ -30,17 +30,6 @@ Tvector getYstar(std::vector<Tvector> vec) {
 		yStar[i] = sum / vec.size();
 		sum = 0;
 	}
-	/*int counter{0};
-	int i{0};
-	for (auto v : vec) {
-		double yIAverage{0.0};
-		for (i = 0; i < v.size(); ++i) {
-			yIAverage += v[i];
-		}
-		yStar[counter] = yIAverage/i;
-		i = 0;
-		++counter;
-	}*/
 	return yStar;
 }
 int main()
@@ -92,7 +81,6 @@ int main()
 		for (int j = 0; j < variables.size(); ++j) {
 			point[j] = variables[j][i];
 		}
-		//print(point);
 		//собираем матрицу F
 		Tvector temp(pCount);
 		F(i, 0) = temp[0] = X1(point);
@@ -104,12 +92,6 @@ int main()
 	//выисление матрицы С
 	std::cout << "\n****matrix F****" << std::endl;
 	print(F);
-	/*std::cout << "Ft: " << std::endl;
-	print(F.T());
-	std::cout << "Ft*F: " << std::endl;
-	print(F.T()*F);
-	std::cout << "(Ft*F)^-1: " << std::endl;
-	print(!(F.T()*F));*/
 	std::cout << "\n****matrix F.T****" << std::endl;
 	print(F.T());
 	std::cout << "\n****matrix C'****" << std::endl;
@@ -135,8 +117,6 @@ int main()
 	for (int i = 0; i < aStar.size(); ++i) {
 		aStarT(0, i) = aStar[i];
 	}
-	/*std::cout << "\n****vector a*(T) ****\n";
-	print(aStarT);*/
 
 	std::vector<Tvector> y_(measures.front().size()); //оценки измерений
 	for (int i = 0; i < y_.size(); ++i) {
@@ -185,9 +165,6 @@ int main()
 	double left, right; //левая, правая границы доверительных интервалов
 	for (int i = 0; i < 3; ++i) {
 		for (int j = 0; j < aStar.size(); ++j) {
-			/*-Za * Cii*s <= a * -a <= Za * Cii*s
-				- ZaCiis - a * <= -a <= ZaCiis - a *
-				+ZaCiis + a * >= a >= -ZaCiis + a * */
 			if (i == 0) {
 				if(j == 0)
 					std::cout << "\n****Confidence interval for Z distribution****\n";
